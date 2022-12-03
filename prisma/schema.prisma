@@ -9,3 +9,33 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Form {
+  formId       String         @id @default(uuid())
+  owner        String?
+  name         String?
+  description  String
+  body         Json?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  FormResponse FormResponse[]
+}
+
+model FormResponse {
+  formResponseId String   @id @default(uuid())
+  owner          String?
+  parentForm     Form     @relation(fields: [parentFormId], references: [formId])
+  parentFormId   String
+  replies        String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model User {
+  userId    Int      @id @default(autoincrement())
+  email     String
+  name      String?
+  password  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
