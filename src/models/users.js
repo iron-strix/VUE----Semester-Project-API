@@ -15,7 +15,7 @@ export const updateUser = async (id, userData) => {
   const user = await getUser(id)
   if (user) {
     return database.User.update({
-      where: { userId: id },
+      where: { userUUID: id },
       data: { ...user, ...userData, updatedAt: new Date() },
     })
   }
@@ -23,4 +23,4 @@ export const updateUser = async (id, userData) => {
 }
 
 export const deleteUser = async (id) =>
-  database.User.delete({ where: { userId: id } })
+  database.User.delete({ where: { userUUID: id } })

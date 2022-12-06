@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
-  const user = await updateUser(parseInt(req.params.id, 10), req.body)
+  const user = await updateUser(req.params.id, req.body)
   if (user) {
     res.send(user)
   } else {
@@ -44,7 +44,7 @@ router.put('/:id', async (req, res) => {
 })
 
 router.delete('/:id', async (req, res) => {
-  const user = await deleteUser(parseInt(req.params.id, 10))
+  const user = await deleteUser(req.params.id)
   if (user) {
     res.send(user)
   } else {
