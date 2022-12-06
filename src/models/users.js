@@ -6,7 +6,7 @@ const database = new PrismaClient()
 export const getUsers = async () => database.User.findMany()
 
 export const getUser = async (id) =>
-  database.User.findUnique({ where: { userId: id } })
+  database.User.findUnique({ where: { userUUID: id } })
 
 export const addUser = async (userData) =>
   database.User.create({ data: { ...userData } })

@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-  const user = await getUser(parseInt(req.params.id, 10))
+  const user = await getUser(req.params.id)
   if (user) {
     res.send(user)
   } else {
