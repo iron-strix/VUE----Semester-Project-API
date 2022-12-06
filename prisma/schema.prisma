@@ -35,6 +35,7 @@ model FormResponse {
 
 model User {
   userId       Int            @id @default(autoincrement())
+  userUUID     String
   role         Role           @default(USER)
   email        String?
   name         String         @unique
