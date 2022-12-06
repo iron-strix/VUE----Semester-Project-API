@@ -12,10 +12,11 @@ datasource db {
 
 model Form {
   formId       String         @id @default(uuid())
-  owner        String?
-  name         String?
-  description  String
-  body         Json?
+  owner        User           @relation(fields: [ownerId], references: [userId])
+  ownerId      Int
+  name         String
+  description  String?
+  body         Json
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
   FormResponse FormResponse[]
@@ -23,19 +24,28 @@ model Form {
 
 model FormResponse {
   formResponseId String   @id @default(uuid())
-  owner          String?
+  owner          User     @relation(fields: [ownerId], references: [userId])
+  ownerId        Int
   parentForm     Form     @relation(fields: [parentFormId], references: [formId])
   parentFormId   String
-  replies        String?
+  replies        Json
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
 
 model User {
-  userId    Int      @id @default(autoincrement())
-  email     String
-  name      String?  @unique
-  password  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  userId       Int            @id @default(autoincrement())
+  role         Role           @default(USER)
+  email        String?
+  name         String         @unique
+  password     String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  FormResponse FormResponse[]
+  Form         Form[]
+}
+
+enum Role {
+  USER
+  ADMIN
 }
