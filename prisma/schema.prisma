@@ -35,7 +35,7 @@ model FormResponse {
 
 model User {
   userId       Int            @id @default(autoincrement())
-  userUUID     String
+  userUUID     String         @unique
   role         Role           @default(USER)
   email        String?
   createdAt    DateTime       @default(now())
