@@ -26,10 +26,9 @@ export const updateForm = async (id, body) =>
     },
   })
 
-export const deleteForm = async (id) => {
+export const deleteForm = async (id) =>
   database.Form.delete({
     where: {
       formId: id,
     },
   })
-}
