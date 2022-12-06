@@ -16,7 +16,7 @@ export const updateUser = async (id, userData) => {
   if (user) {
     return database.User.update({
       where: { userUUID: id },
-      data: { ...user, ...userData, updatedAt: new Date() },
+      data: { ...userData, updatedAt: new Date() },
     })
   }
   return null
